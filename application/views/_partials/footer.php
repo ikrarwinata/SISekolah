@@ -34,7 +34,7 @@
 			<div class="clearfix"> </div>
 		</div>
 		<div class="footer-bottom-agile">
-			<p>© 2021 <?php echo $this->Profil_sekolah_model->get_profil("nama_singkat_sekolah") ?> . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts.</a></p>
+			<p>© 2021 <?php echo $this->Profil_sekolah_model->get_profil("nama_singkat_sekolah") ?> . | Design by <a href="http://w3layouts.com">Sulaiman.</a></p>
 		</div>
 	</div>
 </div>
