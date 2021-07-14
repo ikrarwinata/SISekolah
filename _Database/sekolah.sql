@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jun 2021 pada 10.37
+-- Waktu pembuatan: 14 Jul 2021 pada 10.46
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -27,12 +27,14 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `admin`
 --
 
-CREATE TABLE `admin` (
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(35) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `telp` varchar(22) DEFAULT NULL
+  `telp` varchar(22) DEFAULT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -48,17 +50,19 @@ INSERT INTO `admin` (`username`, `password`, `nama`, `email`, `telp`) VALUES
 -- Struktur dari tabel `alumni`
 --
 
-CREATE TABLE `alumni` (
+DROP TABLE IF EXISTS `alumni`;
+CREATE TABLE IF NOT EXISTS `alumni` (
   `nis` varchar(26) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
   `tanggal_lahir` varchar(21) NOT NULL,
-  `tahun_masuk` int(4) NOT NULL DEFAULT 2021,
-  `tahun_lulus` int(4) NOT NULL DEFAULT 2020,
+  `tahun_masuk` int(11) NOT NULL DEFAULT 2021,
+  `tahun_lulus` int(11) NOT NULL DEFAULT 2020,
   `email` varchar(50) DEFAULT NULL,
   `hp` varchar(22) DEFAULT NULL,
-  `alamat` text DEFAULT NULL
+  `alamat` text DEFAULT NULL,
+  PRIMARY KEY (`nis`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -66,7 +70,11 @@ CREATE TABLE `alumni` (
 --
 
 INSERT INTO `alumni` (`nis`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `tahun_masuk`, `tahun_lulus`, `email`, `hp`, `alamat`) VALUES
-('12323456789', 'Alumni 1', 'Pria', 'Jambi', '25-07-1984', 2010, 2019, 'debuger@mail.com', '123123', 'J');
+('17102309', 'Sindi Claudia', 'Wanita', 'Lambur Luar', '03-12-2004', 2017, 2020, 'cindy.bismhaniac@gmail.com', '082217504443', 'Rt. 02 Karya baru . lambur'),
+('17103321', 'Saiful Rizal', 'Pria', 'Kota Harapan', '12-11-2004', 2017, 2020, 'Saiful.rizal.96387@gmail.com', '085378051554', 'Rt. 11 Dusun mandiri , kota harapan'),
+('17102258', 'Mery', 'Wanita', 'Lambur Luar', '03-07-2005', 20017, 2020, 'mery,037@gmail.com', '082141012018', 'Rt. 05 Dusun polewali, Lambur luar'),
+('17107534', 'Lita Sandra Dewi', 'Wanita', 'Lambur Luar', '02-12-2004', 2017, 2020, 'lita.alhdyt@gmail.com', '081377514246', 'Rt. 01 Dusun Karya baru, Lambur luar'),
+('17108692', 'Desmawati', 'Wanita', 'Lambur Luar', '21-12-2004', 2017, 2020, 'deazhy.drills@gmail.com', '082236515715', 'Rt. 05 Dusun Polewali, Lambur Luar');
 
 -- --------------------------------------------------------
 
@@ -74,23 +82,24 @@ INSERT INTO `alumni` (`nis`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_l
 -- Struktur dari tabel `berita`
 --
 
-CREATE TABLE `berita` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `berita`;
+CREATE TABLE IF NOT EXISTS `berita` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(200) NOT NULL,
   `foto` text DEFAULT NULL,
   `deskripsi` text NOT NULL,
   `tanggal` varchar(100) NOT NULL,
   `user` varchar(26) NOT NULL,
-  `dilihat` int(11) NOT NULL DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `dilihat` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `berita`
 --
 
 INSERT INTO `berita` (`id`, `caption`, `foto`, `deskripsi`, `tanggal`, `user`, `dilihat`) VALUES
-(2, 'CCCCC ads asCCC CCCC a', './files/berita/berita_img1614397978.jpg', '<p>sad asd as dsa das dsa dsa as as as as asdsadasdas asd asd as</p>', '1614470400', 'admin', 0),
-(3, 'CCCCC ads asCCC CCCC a  qw dq', './files/berita/berita_img1614528857.jpg', '<p>Keterangann .as dalsk dlas jdlals lkj askdja jl sjl aslk aslk jasdlk jasd</p>\r\n\r\n<p>as ljdlas jlj alkjas d</p>\r\n\r\n<p>a sldjak jdlk</p>\r\n\r\n<p>111111111111111111111111111</p>\r\n\r\n<p>22222222222222222222222222222222222222222222222222</p>\r\n\r\n<p>3333333333333333333333333333333333</p>\r\n\r\n<p>44444444444444444444444444444444444444</p>', '1614038400', 'admin', 13);
+(3, 'Banguan sekolah', './files/berita/berita_img1625240365.jpg', '<p>-</p>', '1614038400', 'admin', 13);
 
 -- --------------------------------------------------------
 
@@ -98,22 +107,24 @@ INSERT INTO `berita` (`id`, `caption`, `foto`, `deskripsi`, `tanggal`, `user`, `
 -- Struktur dari tabel `carousel`
 --
 
-CREATE TABLE `carousel` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `carousel`;
+CREATE TABLE IF NOT EXISTS `carousel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `file` text NOT NULL,
   `header` varchar(200) DEFAULT NULL,
-  `text` varchar(250) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `text` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `carousel`
 --
 
 INSERT INTO `carousel` (`id`, `file`, `header`, `text`) VALUES
-(7, './files/profil_sekolah/carousel_img1614527388.jpg', 'IN ........... ULTRICES MAURIS 4', 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
-(6, './files/profil_sekolah/carousel_img1614448443.jpg', 'NULLAM UT DAPIBUS 1', 'LOREM IPSUM DOLOR'),
-(5, './files/profil_sekolah/carousel_img1614448407.jpg', 'LOREM IPSUM DOLOR 2', 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit..'),
-(4, './files/profil_sekolah/carousel_img1614448372.jpg', 'IN ULTRICES MAURIS 3', 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.');
+(7, './files/profil_sekolah/carousel_img1625238031.jpg', 'KOTA HARAPAN', 'lmiyah'),
+(6, './files/profil_sekolah/carousel_img1625238021.jpg', 'MTs DARUL DA\'WAH WAL IRSYAD', 'Beramal'),
+(5, './files/profil_sekolah/carousel_img1625237647.jpg', 'DI', 'Amaliyah'),
+(4, './files/profil_sekolah/carousel_img1625237656.jpg', 'Selamat Datang', 'Berilmu');
 
 -- --------------------------------------------------------
 
@@ -121,13 +132,15 @@ INSERT INTO `carousel` (`id`, `file`, `header`, `text`) VALUES
 -- Struktur dari tabel `fasilitas`
 --
 
-CREATE TABLE `fasilitas` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `fasilitas`;
+CREATE TABLE IF NOT EXISTS `fasilitas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `gambar` text DEFAULT NULL,
   `nama` varchar(150) NOT NULL,
-  `jumlah` int(3) NOT NULL DEFAULT 1,
-  `deskripsi` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `jumlah` int(11) NOT NULL DEFAULT 1,
+  `deskripsi` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `fasilitas`
@@ -144,21 +157,20 @@ INSERT INTO `fasilitas` (`id`, `gambar`, `nama`, `jumlah`, `deskripsi`) VALUES
 -- Struktur dari tabel `gallery`
 --
 
-CREATE TABLE `gallery` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `gallery`;
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `file` text NOT NULL,
-  `caption` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `caption` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `gallery`
 --
 
 INSERT INTO `gallery` (`id`, `file`, `caption`) VALUES
-(3, './files/gallery/gallery_img1614510097.jpg', 'CCCCC ads asCCC CCCC'),
-(4, './files/gallery/gallery_img1614528093.jpg', 'asd1'),
-(5, './files/gallery/gallery_img1614528104.jpg', 'a sd2'),
-(7, './files/gallery/gallery_img1614528140.jpg', 'ads q qw4');
+(5, './files/gallery/gallery_img1614528104.jpg', 'a sd2');
 
 -- --------------------------------------------------------
 
@@ -166,8 +178,9 @@ INSERT INTO `gallery` (`id`, `file`, `caption`) VALUES
 -- Struktur dari tabel `guru`
 --
 
-CREATE TABLE `guru` (
-  `nip` varchar(26) NOT NULL,
+DROP TABLE IF EXISTS `guru`;
+CREATE TABLE IF NOT EXISTS `guru` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   `jabatan` varchar(100) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
@@ -179,16 +192,21 @@ CREATE TABLE `guru` (
   `foto` text DEFAULT NULL,
   `fb` text DEFAULT NULL,
   `twitter` text DEFAULT NULL,
-  `whatsapp` text DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `whatsapp` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `guru`
 --
 
-INSERT INTO `guru` (`nip`, `nama`, `jabatan`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `email`, `hp`, `alamat`, `foto`, `fb`, `twitter`, `whatsapp`) VALUES
-('12312321132', 'Guru 1', 'Staff TU', 'Wanita', 'Jambi', '24-06-2021', 'ikrarwinata@gmail.com', '123123', 'Jambiiiiiiiiii', NULL, '', '', ''),
-('123232132', 'Guru 1111122222', 'G', 'Pria', 'Jambi', '16-06-2021', 'mail@mail.com', '123123', 'J', NULL, '', '', '');
+INSERT INTO `guru` (`id`, `nama`, `jabatan`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `email`, `hp`, `alamat`, `foto`, `fb`, `twitter`, `whatsapp`) VALUES
+(1, 'Wahda, S.P.d', 'Bendahar Madrasah', 'Wanita', 'Simbur Naik', '18-08-1995', 'wahdah.thamrin@gmail.com', '081367450065', 'Rt, 10  Dusun pada idi kota harapan', NULL, 'Wahdah Thamrin', '', '081367450065'),
+(2, 'Desi Ismayanti, S.Pd', 'Kepala Madrasah', 'Wanita', 'Kota Harapan, Jambi', '17-04-1995', 'desiisma08@gmail.com', '082371323239', 'Rt. 11 Dusun Mandiri. Kota Harapan', NULL, '-', '-', '082371323239'),
+(3, 'Muamar, S.Pd', 'Wakil Kepala Madrasah', 'Pria', 'Lambur, Jambi', '10-03-1988', 'Muammar.muhammad.3@gmail.com', '082289841412', 'Rt. 01 Dusun Karya Baru, Jambi', NULL, 'Moeammar Marly', '-', '-'),
+(4, 'Muhammad Lutfi', 'Pembina Osis', 'Pria', 'Lambur Luar', '10-06-19987', 'ahmad.lutfi.1023@gmail.com', '081373393770', 'Rt. 05 Dusun polewali, Lambur luar.', NULL, 'Ahmad Lutfi Anas', '', '081373393770'),
+(5, 'Suhartang, SE.Sy', 'Pembina Pramuka', 'Pria', 'Lambur Luar', '03-08-1981', 'Suhartang.damar@gmail.com', '082286364737', 'Rt. 10 Dususn padaidi , kota harapan', NULL, 'Muhammad Suhartang Alfatih', '', '082286364737'),
+(6, 'Lisda Yanti, S.Pd', 'Kepala Perpustakaan', 'Wanita', 'Karya Baru', '03-12-1996', 'lissdaaja0396@gmail.com', '082177551214', 'Rt. 02 Dusun Karya Baru, Lambur Luar', NULL, 'Lisda Yanti', '', '082177551214');
 
 -- --------------------------------------------------------
 
@@ -196,14 +214,16 @@ INSERT INTO `guru` (`nip`, `nama`, `jabatan`, `jenis_kelamin`, `tempat_lahir`, `
 -- Struktur dari tabel `kegiatan_siswa`
 --
 
-CREATE TABLE `kegiatan_siswa` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `kegiatan_siswa`;
+CREATE TABLE IF NOT EXISTS `kegiatan_siswa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `hari` varchar(100) NOT NULL,
   `kegiatan` text NOT NULL,
   `jam` varchar(5) NOT NULL,
   `jam_selesai` varchar(5) DEFAULT NULL,
-  `foto` text DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `foto` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kegiatan_siswa`
@@ -234,10 +254,12 @@ INSERT INTO `kegiatan_siswa` (`id`, `hari`, `kegiatan`, `jam`, `jam_selesai`, `f
 -- Struktur dari tabel `kelas`
 --
 
-CREATE TABLE `kelas` (
-  `id` int(11) NOT NULL,
-  `kelas` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `kelas`;
+CREATE TABLE IF NOT EXISTS `kelas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kelas` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kelas`
@@ -254,20 +276,22 @@ INSERT INTO `kelas` (`id`, `kelas`) VALUES
 -- Struktur dari tabel `pendaftar`
 --
 
-CREATE TABLE `pendaftar` (
+DROP TABLE IF EXISTS `pendaftar`;
+CREATE TABLE IF NOT EXISTS `pendaftar` (
   `id` varchar(25) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `asal_sekolah` varchar(150) NOT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
   `tanggal_lahir` int(11) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
-  `nilai_ujian` int(3) NOT NULL DEFAULT 0,
+  `nilai_ujian` int(11) NOT NULL DEFAULT 0,
   `hubungan_wali` enum('Ayah Kandung','Ibu Kandung','Wali') NOT NULL,
   `nama_ortu` varchar(150) NOT NULL,
   `pekerjaan_ortu` varchar(250) NOT NULL,
   `alamat_ortu` text NOT NULL,
   `email_ortu` varchar(50) DEFAULT NULL,
-  `hp_ortu` varchar(25) DEFAULT NULL
+  `hp_ortu` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -275,7 +299,8 @@ CREATE TABLE `pendaftar` (
 --
 
 INSERT INTO `pendaftar` (`id`, `nama`, `asal_sekolah`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `nilai_ujian`, `hubungan_wali`, `nama_ortu`, `pekerjaan_ortu`, `alamat_ortu`, `email_ortu`, `hp_ortu`) VALUES
-('1624069516', 'calon siswa', 'sekolah', 'Jambi', 2021, 'Pria', 55, 'Ayah Kandung', 'ayah', 'pns', 'j', 'm@mail.com', '0101010');
+('1624069516', 'calon siswa', 'sekolah', 'Jambi', 2021, 'Pria', 55, 'Ayah Kandung', 'ayah', 'pns', 'j', 'm@mail.com', '0101010'),
+('1625112119', 'siswa baru 1', 'sd b', 'jambi', 2020, 'Pria', 34, 'Ayah Kandung', 'yahya', 'p', 'alamat', 'mail@mail.com', '0990909090909');
 
 -- --------------------------------------------------------
 
@@ -283,13 +308,15 @@ INSERT INTO `pendaftar` (`id`, `nama`, `asal_sekolah`, `tempat_lahir`, `tanggal_
 -- Struktur dari tabel `pengunjung`
 --
 
-CREATE TABLE `pengunjung` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `pengunjung`;
+CREATE TABLE IF NOT EXISTS `pengunjung` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(100) NOT NULL,
   `useragent` text NOT NULL,
   `tanggal` varchar(100) NOT NULL,
-  `bulan` int(2) NOT NULL DEFAULT 1
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `bulan` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pengunjung`
@@ -316,7 +343,17 @@ INSERT INTO `pengunjung` (`id`, `ip`, `useragent`, `tanggal`, `bulan`) VALUES
 (19, '::1', 'Windows 10, Chrome 91.0.4472.106', '1624040749', 6),
 (20, '::1', 'Windows 10, Chrome 91.0.4472.106', '1624041244', 6),
 (21, '::1', 'Windows 10, Chrome 91.0.4472.106', '1624068841', 6),
-(22, '::1', 'Windows 10, Chrome 91.0.4472.114', '1624869161', 6);
+(22, '::1', 'Windows 10, Chrome 91.0.4472.114', '1624869161', 6),
+(23, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625076356', 6),
+(24, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625111181', 7),
+(25, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625135113', 7),
+(26, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625192172', 7),
+(27, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625202014', 7),
+(28, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625235060', 7),
+(29, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625736529', 7),
+(30, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625764980', 7),
+(31, '::1', 'Windows 10, Chrome 77.0.3865.90', '1625802294', 7),
+(32, '::1', 'Windows 10, Chrome 91.0.4472.124', '1626250599', 7);
 
 -- --------------------------------------------------------
 
@@ -324,14 +361,16 @@ INSERT INTO `pengunjung` (`id`, `ip`, `useragent`, `tanggal`, `bulan`) VALUES
 -- Struktur dari tabel `prestasi`
 --
 
-CREATE TABLE `prestasi` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `prestasi`;
+CREATE TABLE IF NOT EXISTS `prestasi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(150) NOT NULL,
   `tingkat` varchar(150) NOT NULL,
   `foto` text NOT NULL,
   `tanggal` varchar(100) NOT NULL,
-  `deskripsi` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `deskripsi` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `prestasi`
@@ -346,11 +385,13 @@ INSERT INTO `prestasi` (`id`, `nama`, `tingkat`, `foto`, `tanggal`, `deskripsi`)
 -- Struktur dari tabel `profil_sekolah`
 --
 
-CREATE TABLE `profil_sekolah` (
+DROP TABLE IF EXISTS `profil_sekolah`;
+CREATE TABLE IF NOT EXISTS `profil_sekolah` (
   `id` varchar(100) NOT NULL,
   `text` varchar(100) NOT NULL,
   `nilai` text NOT NULL,
-  `inputtype` enum('text','textarea','file','int') NOT NULL DEFAULT 'textarea'
+  `inputtype` enum('text','textarea','file','int') NOT NULL DEFAULT 'textarea',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -360,7 +401,7 @@ CREATE TABLE `profil_sekolah` (
 INSERT INTO `profil_sekolah` (`id`, `text`, `nilai`, `inputtype`) VALUES
 ('alamat', 'Alamat Sekolah', 'Jln. Melati RT 007 Dusun Pada Idi Desa Kota Harapan Kecematan Muara Sabak Timur Kabupaten Tanjung Jabung Timur.', 'textarea'),
 ('phone', 'Telepon Sekolah', '082281549345', 'text'),
-('email', 'Email Sekolah', 'ikrarwinata04@gmail.com', 'text'),
+('email', 'Email Sekolah', 'mtsddikotaharapan@gmail.com', 'text'),
 ('nama_sekolah', 'Nama Sekolah', 'Darud Da’wah Wal Irsyad Kota Harapan', 'text'),
 ('nama_singkat_sekolah', 'Singkatan Sekolah', 'MTs DDI Kota Harapan', 'text'),
 ('provinsi', 'Provinsi', 'Jambi', 'text'),
@@ -378,8 +419,8 @@ INSERT INTO `profil_sekolah` (`id`, `text`, `nilai`, `inputtype`) VALUES
 ('sejarah', 'Sejarah Sekolah', '<p>Pada tahun 1980 Pengurus Yayasan Darud Da’wah Wal Irsyad bersama pemerintah setempat dan warga Desa Kota Harapan bersepakat dalam sebuah musyawarah pendirian Madrasah Tsanawiyah Darud Da’wah Wal Irsyad sebagai bentuk pendidikan formal dengan identitas Madrasah Darud Da’wah Wal Irsyad.</p>\r\n\r\n<p>Didirikan Pada 28 Februari 2006, yang direskimkan oleh Kanwil Kemenag Prov Jambi dengan nomor SK Kanwol Kemenag Jambi No:Kw 05.4/4/PP.03.3/417/2006.</p>\r\n', 'textarea'),
 ('struktur', 'Gambar Struktur Organisasi', './files/profil_sekolah/struktur_img1614438129.JPG', 'text'),
 ('keterangan_struktur', 'Keterangan Struktur', '<p>Pengurus Cabang :</p>\r\n\r\n<ul>\r\n <li>Pemerintah Desa Lambur Dan Kota Harapan</li>\r\n <li>Pengurus Cabang Darud Da’wah Wal Irsyad</li>\r\n</ul>\r\n\r\n<p>Kepala Madrasah :</p>\r\n\r\n<ul>\r\n <li>Desi Ismayanti, S.Pd</li>\r\n</ul>\r\n\r\n<p>Wakil Kepala Madrasah :</p>\r\n\r\n<ul>\r\n <li>Muamar, S.Pd</li>\r\n</ul>\r\n\r\n<p>Bendahara Madrasah :</p>\r\n\r\n<ul>\r\n <li>Wahdah, S.Pd</li>\r\n</ul>\r\n\r\n<p>Komite Madrasah :</p>\r\n\r\n<ul>\r\n <li>Sukardi</li>\r\n</ul>\r\n\r\n<p>Pembina Osis :</p>\r\n\r\n<ul>\r\n <li>Muhammad Lutfi</li>\r\n</ul>\r\n\r\n<p>Pembina Pramuka :</p>\r\n\r\n<ul>\r\n <li>Sahartang,SE,SY</li>\r\n</ul>\r\n\r\n<p>Kepala Perpustakaan :</p>\r\n\r\n<ul>\r\n <li>Andi Reski Iriani</li>\r\n</ul>\r\n\r\n<p>BP dan BK :</p>\r\n\r\n<ul>\r\n <li>Rosida,S.Pd</li>\r\n</ul>\r\n\r\n<p>Kepala Tata Usaha :</p>\r\n\r\n<ul>\r\n <li>Muhammad Rudi</li>\r\n</ul>\r\n', 'textarea'),
-('email_petugas_psb', 'Email Petugas Penerimaan Siswa Baru', 'ikrarwinata@gmail.com', 'text'),
-('password_email', 'Password Email Sekolah', 'natadecoco13', 'textarea');
+('email_petugas_psb', 'Email Petugas Penerimaan Siswa Baru', 'sulaimanmei@gmail.com', 'text'),
+('password_email', 'Password Email Sekolah', 'kotaharapan123', 'textarea');
 
 -- --------------------------------------------------------
 
@@ -387,16 +428,18 @@ INSERT INTO `profil_sekolah` (`id`, `text`, `nilai`, `inputtype`) VALUES
 -- Struktur dari tabel `siswa`
 --
 
-CREATE TABLE `siswa` (
+DROP TABLE IF EXISTS `siswa`;
+CREATE TABLE IF NOT EXISTS `siswa` (
   `nis` varchar(26) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
   `tanggal_lahir` varchar(21) NOT NULL,
-  `tahun_masuk` int(4) NOT NULL DEFAULT 2021,
+  `tahun_masuk` int(11) NOT NULL DEFAULT 2021,
   `email` varchar(50) DEFAULT NULL,
   `hp` varchar(22) DEFAULT NULL,
-  `alamat` text DEFAULT NULL
+  `alamat` text DEFAULT NULL,
+  PRIMARY KEY (`nis`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -404,148 +447,11 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `tahun_masuk`, `email`, `hp`, `alamat`) VALUES
-('12323456789', 'siswa1', 'Wanita', 'Jmb', '04-03-2021', 2007, 'mail@mail.com', '909090090090', 'asdsad'),
-('234234234', 'siswa2', 'Wanita', 'Jmb', '04-03-2021', 2008, 'mail@mail.com', '909090090090', 'asdsad');
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indeks untuk tabel `alumni`
---
-ALTER TABLE `alumni`
-  ADD PRIMARY KEY (`nis`);
-
---
--- Indeks untuk tabel `berita`
---
-ALTER TABLE `berita`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `carousel`
---
-ALTER TABLE `carousel`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `fasilitas`
---
-ALTER TABLE `fasilitas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `gallery`
---
-ALTER TABLE `gallery`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `guru`
---
-ALTER TABLE `guru`
-  ADD PRIMARY KEY (`nip`);
-
---
--- Indeks untuk tabel `kegiatan_siswa`
---
-ALTER TABLE `kegiatan_siswa`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `kelas`
---
-ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `pendaftar`
---
-ALTER TABLE `pendaftar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `pengunjung`
---
-ALTER TABLE `pengunjung`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `prestasi`
---
-ALTER TABLE `prestasi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `profil_sekolah`
---
-ALTER TABLE `profil_sekolah`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `siswa`
---
-ALTER TABLE `siswa`
-  ADD PRIMARY KEY (`nis`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `berita`
---
-ALTER TABLE `berita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `carousel`
---
-ALTER TABLE `carousel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT untuk tabel `fasilitas`
---
-ALTER TABLE `fasilitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT untuk tabel `gallery`
---
-ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT untuk tabel `kegiatan_siswa`
---
-ALTER TABLE `kegiatan_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT untuk tabel `kelas`
---
-ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `pengunjung`
---
-ALTER TABLE `pengunjung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT untuk tabel `prestasi`
---
-ALTER TABLE `prestasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+('20504291', 'Aksar Ardiansyah', 'Pria', 'Kota Harapan', '02-04-2007', 2020, 'aksas.ardiansyah@gmail.com', '082281303396', 'Rt. 09 dusun pada idi kota harapan'),
+('20504210', 'Ayustia Miranda', 'Wanita', 'Lambur Luar', '13-08-2007', 2020, 'ayustia.miranda.1@gmail.com', '085244177664', 'Rt. 02 Setia palapa. lambur luar'),
+('20504255', 'M. Fadlan', 'Pria', 'Kota Harapan', '23-04-2008', 2020, 'm.fadlan.3572@gmail,com', '082353479069', 'Rt. 11 Dusun pada idi kota harapan'),
+('20504212', 'Kasih Febriyana Haida', 'Wanita', 'Lambur Luar', '02-02-2008', 2020, 'kasih.haida@gmail.com', '082283776636', 'Rt. 02 Dusun setia palapa, Lambur luar'),
+('20504207', 'Nurhayati', 'Wanita', 'Kota Harapan', '02-05-2007', 2020, 'inur.inur26@gmail.com', '081367613609', 'Rt. 11 Dusun mandiri, kota harapan');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
