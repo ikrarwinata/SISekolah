@@ -384,6 +384,14 @@ class Welcome extends CI_Controller {
         $this->load->view('container',$data);
     }
 
+    public function link2(){
+        
+        $data = array(
+            'konten' => "baru",
+        );
+        $this->load->view('container',$data);
+    }
+
     public function kontak()
     {
         $data = array(
