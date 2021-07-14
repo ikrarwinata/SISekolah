@@ -74,7 +74,6 @@ class Guru extends CI_Controller
                                                         "Detail",
                                                         );
             $data = array(
-                    'nip' => $row->nip,
                     'nama' => $row->nama,
                     'jabatan' => $row->jabatan,
                     'jenis_kelamin' => $row->jenis_kelamin,
@@ -118,7 +117,7 @@ class Guru extends CI_Controller
         $data = array(
                     'button' => 'Simpan',
                     'action' => site_url('admin/Guru/create_action'),
-	                'nip' => set_value('nip'),
+	                'id' => set_value('id'),
 	                'nama' => set_value('nama'),
 	                'jabatan' => set_value('jabatan'),
 	                'jenis_kelamin' => set_value('jenis_kelamin', "Pria"),
@@ -151,7 +150,6 @@ class Guru extends CI_Controller
             $this->load->library('upload', $config);
 
             $data = array(
-                    'nip' => $this->input->post('newnip',TRUE),
                     'nama' => $this->input->post('nama',TRUE),
                     'jabatan' => $this->input->post('jabatan',TRUE),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
@@ -202,7 +200,7 @@ class Guru extends CI_Controller
             $data = array(
                     'button' => 'Simpan',
                     'action' => site_url('admin/Guru/update_action'),
-                    'nip' => set_value('nip', $row->nip),
+                    'id' => set_value('id', $row->id),
                     'nama' => set_value('nama', $row->nama),
                     'jabatan' => set_value('jabatan', $row->jabatan),
                     'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
@@ -240,7 +238,6 @@ class Guru extends CI_Controller
             $this->load->library('upload', $config);
 
             $data = array(
-                    'nip' => $this->input->post('newnip',TRUE),
                     'nama' => $this->input->post('nama',TRUE),
                     'jabatan' => $this->input->post('jabatan',TRUE),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
@@ -262,7 +259,7 @@ class Guru extends CI_Controller
                 $data['foto'] = $foto;
             }
 
-            $this->Guru_model->update($this->input->post('nip', TRUE), $data);
+            $this->Guru_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('ci_flash_message', 'Data berhasil diperbarui');
             $this->session->set_flashdata('ci_flash_message_type', ' text-success ');
             redirect(site_url('admin/Guru'));
@@ -301,7 +298,6 @@ class Guru extends CI_Controller
        $this->form_validation->set_rules('fb', 'fb', 'trim');
        $this->form_validation->set_rules('twitter', 'twitter', 'trim');
        $this->form_validation->set_rules('whatsapp', 'whatsapp', 'trim');
-       $this->form_validation->set_rules('nip', 'nip', 'trim');
        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
@@ -352,7 +348,6 @@ class Guru extends CI_Controller
         $fu = 0;
         foreach ($e as $key => $guru) {
             $data = array(
-                "nip"=> $guru['nip'],
                 "nama"=> $guru['nama'],
                 "jabatan"=> $guru['jabatan'],
                 "jenis_kelamin"=> $guru['jenis_kelamin'],

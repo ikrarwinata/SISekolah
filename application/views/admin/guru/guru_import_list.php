@@ -19,7 +19,6 @@
 				<thead>
                     <tr>
 					   <th>No</th>
-                         <th>NIP</th>
                          <th>Nama</th>
                          <th>Tempat/Tanggal Lahir</th>
                          <th>Jabatan</th>
@@ -34,7 +33,6 @@
                     ?>
                     <tr>
                         <td width="80px"><?php echo ++$start ?></td>
-                        <td><?php echo $guru['nip'] ?></td>
                         <td><?php echo $guru['nama'] ?></td>
                         <td><?php echo $guru['tempat_lahir'].", ".$guru['tanggal_lahir'] ?></td>
                         <td><?php echo $guru['jabatan'] ?></td>

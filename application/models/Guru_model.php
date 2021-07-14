@@ -7,7 +7,7 @@ class Guru_model extends CI_Model
 {
 
     public $table = 'guru';
-    public $id = 'nip';
+    public $id = 'id';
     public $order = 'ASC';
     public $defaultorder = 'DESC';
 
@@ -79,7 +79,6 @@ class Guru_model extends CI_Model
     function total_rows($q = NULL) {
         if($q!=NULL){
             $this->db->group_start();
-            $this->db->like('nip', $q);
             $this->db->or_like('nama', $q);
             $this->db->or_like('jabatan', $q);
             $this->db->or_like('jenis_kelamin', $q);
@@ -109,7 +108,6 @@ class Guru_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         if($q!=NULL){
             $this->db->group_start();
-            $this->db->like('nip', $q);
             $this->db->or_like('nama', $q);
             $this->db->or_like('jabatan', $q);
             $this->db->or_like('jenis_kelamin', $q);
@@ -138,7 +136,6 @@ class Guru_model extends CI_Model
         $this->db->group_end();
         if($q!=NULL){
             $this->db->group_start();
-            $this->db->like('nip', $q);
             $this->db->or_like('nama', $q);
             $this->db->or_like('jabatan', $q);
             $this->db->or_like('jenis_kelamin', $q);

@@ -1,6 +1,5 @@
 
         <table class="table">
-			<tr><td>NIP</td><td><?php echo $nip; ?></td></tr>
 			<tr><td>Nama</td><td><?php echo $nama; ?></td></tr>
 			<tr><td>Jabatan</td><td><?php echo $jabatan; ?></td></tr>
 			<tr><td>Jenis Kelamin</td><td><?php echo $jenis_kelamin; ?></td></tr>

@@ -54,9 +54,9 @@
                     <td><?php echo $guru->hp ?></td>
                     <td><img src="<?php echo $guru->foto ?>" style="max-width: 90%;max-height: 100px"></td>
                     <td style="text-align:center" width="200px">
-                        <a href="<?php echo site_url('admin/Guru/read/' . $guru->nip) ?>" title="Lihat detail"><i class="fa fa-eye fa-lg text-primary"></i></a>&nbsp;
-                        <a href="<?php echo site_url('admin/Guru/update/' . $guru->nip) ?>" title="Ubah"><i class="fa fa-edit fa-lg text-success"></i></a>&nbsp;
-                        <a href="<?php echo site_url('admin/Guru/delete/' . $guru->nip) ?>" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus data ini ?')"><i class="fa fa-trash fa-lg text-danger"></i></a>
+                        <a href="<?php echo site_url('admin/Guru/read/' . $guru->id) ?>" title="Lihat detail"><i class="fa fa-eye fa-lg text-primary"></i></a>&nbsp;
+                        <a href="<?php echo site_url('admin/Guru/update/' . $guru->id) ?>" title="Ubah"><i class="fa fa-edit fa-lg text-success"></i></a>&nbsp;
+                        <a href="<?php echo site_url('admin/Guru/delete/' . $guru->id) ?>" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus data ini ?')"><i class="fa fa-trash fa-lg text-danger"></i></a>
                     </td>
                 </tr>
             <?php

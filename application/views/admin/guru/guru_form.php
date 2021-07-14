@@ -31,16 +31,6 @@
 
                             <div class="col-xs-12 col-sm-8">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label no-padding-right" for="form-field-nip">NIP</label>
-
-                                    <div class="col-sm-8">
-                                        <input class="col-xs-12 col-sm-10" type="text" id="form-field-nip" placeholder="NIP" value="<?php echo $nip ?>" name="newnip" required="true" />
-                                    </div>
-                                </div>
-
-                                <div class="space-4"></div>
-
-                                <div class="form-group">
                                     <label class="col-sm-4 control-label no-padding-right" for="form-field-name">Nama</label>
 
                                     <div class="col-sm-8">
@@ -191,7 +181,7 @@
             </div>
 
            <input type="hidden" name="oldfoto" value="<?php echo $foto; ?>" /> 
-           <input type="hidden" name="nip" value="<?php echo $nip; ?>" /> 
+           <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
             <div class="clearfix form-actions">
                 <div class="col-md-offset-3 col-md-9">
                     <button class="btn btn-info" type="submit">

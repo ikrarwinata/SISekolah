@@ -1,7 +1,7 @@
 <!--/about -->
 <div id="about" class="about all_pad w3ls">
 	<div class="container">
-		<h3 class="w3-about-title">Tenaga Pengajar</h3>
+		<h1 class="w3-about-title">Tenaga Pengajar</h1>
 		<div class="ser-top-grids">
             <div class="row" style="margin: auto 8px;">
                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -34,7 +34,6 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>NIP</th>
                         <th>Nama</th>
                         <th>Jabatan</th>
                     </tr>
@@ -46,7 +45,6 @@
                         ?>
                         <tr>
                             <td width="80px"><?php echo ++$start ?></td>
-                            <td width="150px"><?php echo $guru->nip ?></td>
                             <td><?php echo $guru->nama ?></td>
                             <td><?php echo $guru->jabatan ?></td>
                         </tr>
